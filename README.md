@@ -1,4 +1,4 @@
-# Projeto Ecommerce Flabijoux
+# Projeto Ecommerce FlaBijoux
 
  Curso TrueDev
 
