@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,6 +35,18 @@ public class Produto {
     @ManyToAny
     @JoinTable(name = "categorias_produtos", joinColumns = @JoinColumn(name = "id_produto"), inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categorias;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("produto")
+    private List<Variante> variantes;
+
+    public List<Variante> getVariantes() {
+        return variantes;
+    }
+
+    public void setVariantes(List<Variante> variantes) {
+        this.variantes = variantes;
+    }
 
     private Double preco;
     private Integer destaque;
